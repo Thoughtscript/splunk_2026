@@ -72,3 +72,15 @@ Also:
 | stats count by status_code
 ```
 ![](./count-by.png)
+
+### Non-Uniqueness
+
+> Hey, the complement of the above.
+
+```splunk
+| makeresults count=1000 
+| eval status_code = case((random()%3)==0, "200", (random()%3)==1, "404", 1=1, "500")
+| eval status_msg = case(status_code=="200", "OK", status_code=="404", "Not Found", 1=1, "Error")
+| eval uuid = md5(random() . now())
+| stats count by status_code > 1
+```
