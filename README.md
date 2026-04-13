@@ -45,6 +45,7 @@ Comparing `distinct_count()` vs. `stats count values()`:
 > So I should keep using `distinct_count()` and not `count values` - syntatically, `stats count, values(status_code) as distinct_codes` and `stats count values(status_code) as distinct_codes`
 
 And indeed they are!
+
 ```splunk
 | makeresults count=1000 
 | eval status_code = case((random()%3)==0, "200", (random()%3)==1, "404", 1=1, "500")
@@ -54,14 +55,6 @@ And indeed they are!
 ```
 
 ![](./count-comma-values.png)
-
-```splunk
-| makeresults count=1000 
-| eval status_code = case((random()%3)==0, "200", (random()%3)==1, "404", 1=1, "500")
-| eval status_msg = case(status_code=="200", "OK", status_code=="404", "Not Found", 1=1, "Error")
-| eval uuid = md5(random() . now())
-| stats count by status_code
-```
 
 Also:
 ```splunk
