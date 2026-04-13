@@ -1,0 +1,52 @@
+# Splunk_2026
+
+![](https://img.shields.io/badge/splunk-2026-orange)
+
+Review of some basics.
+
+## Setup
+
+```bash
+$ docker run --platform linux/amd64 -d -p 8000:8000 -e "SPLUNK_START_ARGS=--accept-license" -e "SPLUNK_GENERAL_TERMS=--accept-sgt-current-at-splunk-com" -e "SPLUNK_PASSWORD=mypassword" --name splunk splunk/splunk:latest
+```
+
+1. Splunk doesn't release Apple ARM native distros. Use the `--platform linux/amd64` for Rosetta compatibility.
+1. The above command will spin up an instance without having to pass the `-it --name so1 splunk/splunk:latest` flag.
+1. localhost:8000 > with login `admin` and `mypassword`.
+
+## Queries
+
+Comparing `distinct_count()` vs. `stats count values()`:
+
+```splunk
+| makeresults count=1000 
+| eval status_code = case((random()%3)==0, "200", (random()%3)==1, "404", 1=1, "500")
+| eval status_msg = case(status_code=="200", "OK", status_code=="404", "Not Found", 1=1, "Error")
+| eval uuid = md5(random() . now())
+| stats distinct_count(status_code), values(status_code)
+```
+
+![](./distinct_count.png)
+
+```splunk
+| makeresults count=1000 
+| eval status_code = case((random()%3)==0, "200", (random()%3)==1, "404", 1=1, "500")
+| eval status_msg = case(status_code=="200", "OK", status_code=="404", "Not Found", 1=1, "Error")
+| eval uuid = md5(random() . now())
+| stats count values(status_code) as distinct_codes
+```
+
+![](./values.png)
+
+> So I should keep using `distinct_count()` and not `count values` - syntatically, `stats count, values(status_code) as distinct_codes` and `stats count values(status_code) as distinct_codes`
+
+And indeed they are!
+```splunk
+| makeresults count=1000 
+| eval status_code = case((random()%3)==0, "200", (random()%3)==1, "404", 1=1, "500")
+| eval status_msg = case(status_code=="200", "OK", status_code=="404", "Not Found", 1=1, "Error")
+| eval uuid = md5(random() . now())
+| stats count, values(status_code) as distinct_codes
+```
+
+![](./count-comma-values.png)
