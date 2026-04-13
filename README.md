@@ -12,9 +12,13 @@ $ docker run --platform linux/amd64 -d -p 8000:8000 -e "SPLUNK_START_ARGS=--acce
 
 1. Splunk doesn't release Apple ARM native distros. Use the `--platform linux/amd64` for Rosetta compatibility.
 1. The above command will spin up an instance without having to pass the `-it --name so1 splunk/splunk:latest` flag.
-1. localhost:8000 > with login `admin` and `mypassword`.
+1. [localhost:8000](http://localhost:8000/en-US/app/search/search) with login `admin` and `mypassword`.
 
 ## Queries
+
+### Verifying Count Values()
+
+> I guess I did something like this post: https://community.splunk.com/t5/Splunk-Search/Stats-Values-and-Count/m-p/305743
 
 Comparing `distinct_count()` vs. `stats count values()`:
 
@@ -50,3 +54,21 @@ And indeed they are!
 ```
 
 ![](./count-comma-values.png)
+
+```splunk
+| makeresults count=1000 
+| eval status_code = case((random()%3)==0, "200", (random()%3)==1, "404", 1=1, "500")
+| eval status_msg = case(status_code=="200", "OK", status_code=="404", "Not Found", 1=1, "Error")
+| eval uuid = md5(random() . now())
+| stats count by status_code
+```
+
+Also:
+```splunk
+| makeresults count=1000 
+| eval status_code = case((random()%3)==0, "200", (random()%3)==1, "404", 1=1, "500")
+| eval status_msg = case(status_code=="200", "OK", status_code=="404", "Not Found", 1=1, "Error")
+| eval uuid = md5(random() . now())
+| stats count by status_code
+```
+![](./count-by.png)
