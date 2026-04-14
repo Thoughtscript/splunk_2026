@@ -109,12 +109,37 @@ As does this one:
 
 ### Non-Uniqueness
 
-> Hey, the complement of the above.
+Of counts not of values in `values()`:
 
+Basic query to find entries with ***no entries*** associated:
 ```splunk
 | makeresults count=1000 
 | eval status_code = case((random()%3)==0, "200", (random()%3)==1, "404", 1=1, "500")
 | eval status_msg = case(status_code=="200", "OK", status_code=="404", "Not Found", 1=1, "Error")
 | eval uuid = md5(random() . now())
-| stats count by status_code > 1
+| stats count by status_code 
+| where count = 0
 ```
+With ***exactly one*** entry associated:
+```splunk
+| makeresults count=1000 
+| eval status_code = case((random()%3)==0, "200", (random()%3)==1, "404", 1=1, "500")
+| eval status_msg = case(status_code=="200", "OK", status_code=="404", "Not Found", 1=1, "Error")
+| eval uuid = md5(random() . now())
+| stats count by status_code 
+| where count = 1
+```
+
+> Hey, the complement of the above.
+
+Basic query to find entries with ***more than one*** entry associated:
+```splunk
+| makeresults count=1000 
+| eval status_code = case((random()%3)==0, "200", (random()%3)==1, "404", 1=1, "500")
+| eval status_msg = case(status_code=="200", "OK", status_code=="404", "Not Found", 1=1, "Error")
+| eval uuid = md5(random() . now())
+| stats count by status_code
+| where count > 1
+```
+
+![](./count-1-complement.png)
