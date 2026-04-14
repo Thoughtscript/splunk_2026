@@ -109,7 +109,7 @@ As does this one:
 
 ### Non-Uniqueness
 
-Of counts not of values in `values()`:
+Of counts not of values in `values()`.
 
 Basic query to find entries with ***no entries*** associated:
 ```splunk
