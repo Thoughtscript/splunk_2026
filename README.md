@@ -13,6 +13,9 @@ $ docker run --platform linux/amd64 -d -p 8000:8000 -e "SPLUNK_START_ARGS=--acce
 1. Splunk doesn't release Apple ARM native distros. Use the `--platform linux/amd64` for Rosetta compatibility.
 1. The above command will spin up an instance without having to pass the `-it --name so1 splunk/splunk:latest` flag.
 1. [localhost:8000](http://localhost:8000/en-US/app/search/search) with login `admin` and `mypassword`.
+    * It can take a moment for the Splunk instance to get up and running:
+
+      ![](./splunk-docker-start.png)
 
 ## Queries
 
@@ -65,6 +68,43 @@ Also:
 | stats count by status_code
 ```
 ![](./count-by.png)
+
+This also returns the correct count of `3` with `stats count as ... by`:
+
+```splunk
+| makeresults count=1000 
+| eval status_code = case((random()%3)==0, "200", (random()%3)==1, "404", 1=1, "500")
+| eval status_msg = case(status_code=="200", "OK", status_code=="404", "Not Found", 1=1, "Error")
+| eval uuid = md5(random() . now())
+| stats count as code_counts values(status_code) by status_code
+```
+
+![](./stats-count-as-by.png)
+
+As does this one:
+
+```splunk
+| makeresults count=1000 
+| eval status_code = case((random()%3)==0, "200", (random()%3)==1, "404", 1=1, "500")
+| eval status_msg = case(status_code=="200", "OK", status_code=="404", "Not Found", 1=1, "Error")
+| eval uuid = md5(random() . now())
+| stats values(status_code) as unique_codes 
+| stats count by unique_codes
+```
+
+![](./double-stats.png)
+
+Note: the following will ***NOT*** give the desired count of `3`:
+
+```splunk
+| makeresults count=1000 
+| eval status_code = case((random()%3)==0, "200", (random()%3)==1, "404", 1=1, "500")
+| eval status_msg = case(status_code=="200", "OK", status_code=="404", "Not Found", 1=1, "Error")
+| eval uuid = md5(random() . now())
+| stats values(status_code) as unique_codes
+```
+
+![](./just-values.png)
 
 ### Non-Uniqueness
 
