@@ -13,6 +13,7 @@ $ docker run --platform linux/amd64 -d -p 8000:8000 -e "SPLUNK_START_ARGS=--acce
 1. Splunk doesn't release Apple ARM native distros. Use the `--platform linux/amd64` for Rosetta compatibility.
 1. The above command will spin up an instance without having to pass the `-it --name so1 splunk/splunk:latest` flag.
 1. [localhost:8000](http://localhost:8000/en-US/app/search/search) with login `admin` and `mypassword`.
+
     * It can take a moment for the Splunk instance to get up and running:
 
       ![](./splunk-docker-start.png)
@@ -45,7 +46,7 @@ Comparing `distinct_count()` vs. `stats count values()`:
 
 ![](./values.png)
 
-> So I should keep using `distinct_count()` and not `count values` - syntatically, `stats count, values(status_code) as distinct_codes` and `stats count values(status_code) as distinct_codes`
+> So, I should keep using `distinct_count()` and not `count values` - syntatically, `stats count, values(status_code) as distinct_codes` and `stats count values(status_code) as distinct_codes`.
 
 And indeed they are!
 
@@ -94,7 +95,7 @@ As does this one:
 
 ![](./double-stats.png)
 
-Note: the following will ***NOT*** give the desired count of `3`:
+**Note:** the following will ***NOT*** give the desired count of `3`:
 
 ```splunk
 | makeresults count=1000 
