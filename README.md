@@ -1,6 +1,6 @@
 # Splunk_2026
 
-![](https://img.shields.io/badge/splunk-2026-orange)
+![](https://img.shields.io/badge/splunk-2026-orange) [![](https://img.shields.io/badge/My-Credly-darkgreen)](https://www.credly.com/users/adam-gerard/badges/credly)
 
 Review of some basics.
 
