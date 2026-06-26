@@ -11,7 +11,7 @@ Simple example that generates fake data through `makeresults` and then performs 
 | search status_msg="Error" OR status_msg="OK"
 ```
 
-> Fake data is generated since this is a simple Docker example with now ETL Pipeline or Indexing Cluster. I've placed a line break between these two parts to seperate the "fake data" portion from the simple Query example.
+> Fake data is generated since this is a simple Docker example with no ETL Pipeline or Indexing Cluster. I've placed a line break between these two parts to seperate the "fake data" portion from the simple Query example.
 
 Two interesting things here:
 1. In a typical Splunk scenario, there's a real underlying Event (that gets Indexed). It'll typically have a `_raw` field. It's this `_raw` field that the Query: `search "Error" "OK"` queries against (equivalent to `search _raw="Error" AND _raw="OK"`).

@@ -26,6 +26,14 @@ Splunk Core Certified Power User:
 1. [Topic One: Introduction](CCPU-Introduction.md)
 1. [Topic Two: Fields](CCPU-Fields.md)
 1. [Topic Three: Time](CCPU-Time.md)
+1. [Topic Four: Statistical Processing]()
+1. [Topic Five: Comparing Values]()
+1. [Topic Six: Result Modification]()
+1. [Topic Seven: Correlation Analysis]()
+1. [Topic Eight: Introduction to Knowledge Objects]()
+1. [Topic Nine: Creating Knowledge Objects]()
+1. [Topic Ten: Field Extractions]()
+1. [Topic Eleven: Data Models]()
 
 Misc. Command and Query review:
 1. [Count, Values, Distinct Count](Queries-Count-Values.md)
