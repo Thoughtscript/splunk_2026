@@ -23,10 +23,10 @@ $ docker run --platform linux/amd64 -d -p 8000:8000 -e "SPLUNK_START_ARGS=--acce
 ## Queries
 
 Splunk Core Certified Power User:
-1. [Topic One: Introduction](CCPU-Introduction.md)
+1. [Topic One: Introduction to Splunk](CCPU-Introduction.md)
 1. [Topic Two: Fields](CCPU-Fields.md)
 1. [Topic Three: Time](CCPU-Time.md)
-1. [Topic Four: Statistical Processing]()
+1. [Topic Four: Statistical Processing](CCPU-Statistical-Processing.md)
 1. [Topic Five: Comparing Values]()
 1. [Topic Six: Result Modification]()
 1. [Topic Seven: Correlation Analysis]()

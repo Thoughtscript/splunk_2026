@@ -22,7 +22,7 @@ Comparing `distinct_count()` vs. `stats count values()`:
 | stats count values(status_code) as distinct_codes
 ```
 
-![](./values.png)
+![](./_screenshots/values.png)
 
 > So, I should keep using `distinct_count()` and not `count values` - syntatically, `stats count, values(status_code) as distinct_codes` and `stats count values(status_code) as distinct_codes`.
 

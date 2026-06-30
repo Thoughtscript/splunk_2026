@@ -1,4 +1,4 @@
-# Core Certified Power User - Topic One: Introduction
+# Core Certified Power User - Topic One: Introduction to Splunk
 
 Simple example that generates fake data through `makeresults` and then performs a simple `search` with boolean `OR`:
 
