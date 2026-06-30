@@ -30,7 +30,7 @@ Splunk Core Certified Power User:
 1. [Topic Three: Time](CCPU-Time.md)
 1. [Topic Four: Statistical Processing](CCPU-Statistical-Processing.md)
 1. [Topic Five: Comparing Values](CCPU-Comparing-Values.md)
-1. [Topic Six: Result Modification]()
+1. [Topic Six: Result Modification](CCPU-Result-Modification.md)
 1. [Topic Seven: Correlation Analysis]()
 1. [Topic Eight: Introduction to Knowledge Objects]()
 1. [Topic Nine: Creating Knowledge Objects]()
