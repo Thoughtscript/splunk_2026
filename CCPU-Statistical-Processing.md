@@ -103,4 +103,4 @@ Review: [Topic Three: Time](CCPU-Time.md)
 
 ![](./_screenshots/ccpu-sort.png)
 
-* Sort results by a specified **Field** (using prefixed `-` for descending sort).
+* Sort results by a specified **Field** (ascending by default, using prefixed `-` for descending sort).

@@ -4,6 +4,8 @@
 
 Review of some basics.
 
+> [Study Guide](https://render-static-fs.onrender.com/study_guide_notes_2023.splunk.html)
+
 ## Setup
 
 ```bash
@@ -27,7 +29,7 @@ Splunk Core Certified Power User:
 1. [Topic Two: Fields](CCPU-Fields.md)
 1. [Topic Three: Time](CCPU-Time.md)
 1. [Topic Four: Statistical Processing](CCPU-Statistical-Processing.md)
-1. [Topic Five: Comparing Values]()
+1. [Topic Five: Comparing Values](CCPU-Comparing-Values.md)
 1. [Topic Six: Result Modification]()
 1. [Topic Seven: Correlation Analysis]()
 1. [Topic Eight: Introduction to Knowledge Objects]()
