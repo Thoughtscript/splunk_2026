@@ -124,5 +124,41 @@ Compare:
 
 ![](./_screenshots/ccpu-foreach.png)
 
-* `foreach` is typically supplied a list of whitespace-delimitted **Fields**. For each **Field** in that list (indicated using `'<<FIELD>>'` syntax) a specifed Command is applied.
+* `foreach` is typically supplied a list of whitespace-delimitted **Fields**. For each **Field** in that list (indicated using `'<<FIELD>>'` **Template Substring** syntax) a specifed Command is applied.
 * Above, instead of using another `eval` or `eventstats` Command, `foreach` computes a specified ratio adding it as a **Field** value under a new **Field** name.
+
+## tostring, tonumber, upper, lower, substr
+
+```splunk
+| makeresults count=1000 
+| eval host = case((random()%3)==0, "www1", (random()%3)==1, "www2", 1=1, "www3")
+| eval _time = now() - (random() % 86400)
+| eval cost = random() % 10000
+
+| eval str_cost= "$".tostring(cost, "commas")
+| eval num_cost= "$".tonumber(cost, 10)
+| eval str_time = tostring(_time, "duration")
+| eval uppr_host = upper(host)
+| eval substr_host = substr(host, 4, 1)
+```
+
+![](./_screenshots/ccpu-tostring.png)
+
+* `tostring` available formats: `"binary"`, `"hex"`, `"commas"`, `"duration"`.
+* `substr` isn't 0-indexed.
+
+## coalesce
+
+```splunk
+| makeresults count=1000 
+| eval host = case((random()%3)==0, "www1", (random()%3)==1, "www2", 1=1, "www3")
+| eval _time = now() - (random() % 86400)
+| eval a = random() % 10000
+| eval b = random() % 10000
+
+| eval ab = coalesce(a, b)
+```
+
+![](./_screenshots/ccpu-coalesce.png)
+
+* Consolidates two fields with common Values into one.
