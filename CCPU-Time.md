@@ -36,7 +36,7 @@ In both cases, `_time` values are explicitly and randomly generated to populate 
 
 ## Earliest, Latest
 
-The following query use use `latest`, `earliest`, and Time Units which are only supported in Queryies preceding a `makeresults` expression. As such, no result will display (either when this run solitarily or when appended to one of the other Queries):
+The following query use `latest`, `earliest`, and Time Units which are only supported in Queries preceding a `makeresults` expression. As such, no result will display (either when this run solitarily or when appended to one of the other Queries):
 
 ```splunk
 search status_msg="OK" earliest=-30d@d latest=@d
